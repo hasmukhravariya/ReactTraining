@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const Result = props => {
   const { name, gender, country, description } =
     (props.location && props.location.state) || {};
   return (
-    <div>
-      <div className="form-details">
+    <div className='center'>
+      <div className="container">
         <div>
           <strong>Name:</strong> {name}
         </div>
@@ -18,6 +20,7 @@ const Result = props => {
         <div>
           <strong>Description:</strong> {description}
         </div>
+        <Link to={{pathname: "/form"}} className='button'>Back</Link>
       </div>
     </div>
   );

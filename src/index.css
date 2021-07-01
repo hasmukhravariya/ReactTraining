@@ -29,7 +29,20 @@ code {
   border-radius: 12px;
 }
 
-.container {
-  padding: 16px;
-  background-color: white;
+.container {  
+  padding: 50px;  
+  background-color: lightblue;  
+}  
+ div {  
+  padding: 10px 0;  
+} 
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
+

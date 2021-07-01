@@ -5,8 +5,10 @@ import './index.css';
 
 export default function Home() {
   return (
-      <div className="App">
+    <div className='center'>
+      <div className="container">
         <Link to="/Form" className="button">Open</Link>
-      </div>
+      </div>  
+    </div>
   );
 }
