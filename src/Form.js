@@ -23,9 +23,10 @@ const Form = props => {
   options=Countries.country.map((e,key) => <option key={key} value={e.name}>{e.name}</option>);
 
   return (
-    <div className='container'>
-      <form>
-          <div>
+    <div className='center'>
+      <form className='container'>
+       <center>  <h1>Form</h1> </center>  
+        <div>
           <label> Name: </label>   
           <input type="text" name="name" onChange={handleInputChange}/> 
         </div>
@@ -50,8 +51,10 @@ const Form = props => {
           <label>Description:</label>
           <textarea name="description" rows="4" cols="50" onChange={handleInputChange}></textarea>
         </div>
-
-        <Link to={{pathname: "/result",state}} className='button'>Register</Link>
+        <div>
+          <Link to={{pathname: "/result",state}} className='button'>Submit</Link>
+          <Link to={{pathname: "/"}} className='button'>Back</Link>
+        </div>
       </form>
     </div>
   );

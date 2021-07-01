@@ -5,8 +5,8 @@ import './index.css';
 
 export default function Home() {
   return (
-      <div className="App">
-        <Link to="/Form" className="button">Open</Link>
-      </div>
+    <div className='center'>
+      <Link to="/Form" className="button">Open</Link>
+    </div>  
   );
 }
