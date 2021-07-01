@@ -8,6 +8,7 @@ const Result = props => {
   return (
     <div className='center'>
       <div className="container">
+       <center>  <h1> Form Details</h1> </center>  
         <div>
           <strong>Name:</strong> {name}
         </div>

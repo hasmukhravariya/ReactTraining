@@ -25,6 +25,7 @@ const Form = props => {
   return (
     <div className='center'>
       <form className='container'>
+       <center>  <h1>Form</h1> </center>  
         <div>
           <label> Name: </label>   
           <input type="text" name="name" onChange={handleInputChange}/> 
