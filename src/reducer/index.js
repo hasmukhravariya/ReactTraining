@@ -1,20 +1,10 @@
-export const INITIAL_STATE = {
-  name: "",
-  gender: "",
-  country: "",
-  email: "",
-  phone: "",
-  password: "",
-  description: "",
-  error: ""
-};
+import { combineReducers } from "redux";
+import saveReducer from "./saveReducer";
+import userReducer from "./userReducer";
 
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case "SAVE":
-      return Object.assign({}, state, action.name);
-    default:
-      return state;
-  }
-};
+const reducer = combineReducers({
+  save: saveReducer,
+  user: userReducer
+});
+
 export default reducer;
