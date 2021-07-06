@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "../index.css";
 import PropTypes from "prop-types";
-import { getUsers, deleteUser } from "../actions";
+import { getUsers, deleteUser } from "../actions/UserActions";
 import { connect } from "react-redux";
 
 class App extends Component {

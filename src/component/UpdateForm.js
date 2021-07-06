@@ -4,7 +4,7 @@ import "../index.css";
 import validator from "validator";
 import Countries from "../data/Countries";
 import PropTypes from "prop-types";
-import { editUser } from "../actions";
+import { editUser } from "../actions/UserActions";
 import { connect } from "react-redux";
 
 class UpdateForm extends Component {

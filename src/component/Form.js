@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import Countries from "../data/Countries";
 import validator from "validator";
 import { connect } from "react-redux";
-import { save, addUser } from "../actions";
+import {  addUser } from "../actions/UserActions";
+import { save } from "../actions/SaveActions";
 
 class Form extends Component {
   constructor(props) {
