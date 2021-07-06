@@ -7,37 +7,37 @@ export function save(obj) {
   };
 }
 
-export function getEmployee() {
+export function getUsers() {
   return (dispatch) => {
     return dispatch({
-      type: "GET_EMPLOYEE"
+      type: "GET_USERS"
     });
   };
 }
 
-export function addEmployee(data) {
+export function addUser(data) {
   return (dispatch) => {
     return dispatch({
-      type: "ADD_EMPLOYEE",
+      type: "ADD_USER",
       payload: data
     });
   };
 }
 
-export function editEmployee(data) {
+export function editUser(data) {
   return (dispatch) => {
     return dispatch({
-      type: "EDIT_EMPLOYEE",
+      type: "EDIT_USER",
       payload: data
     });
   };
 }
 
-export function deleteEmployee(employeeId) {
+export function deleteUser(userId) {
   return (dispatch) => {
     return dispatch({
-      type: "DELETE_EMPLOYEE",
-      payload: employeeId
+      type: "DELETE_USER",
+      payload: userId
     });
   };
 }
