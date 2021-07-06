@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Countries from "../data/Countries";
+import { Link, withRouter } from "react-router-dom";
+import "../index.css";
 import validator from "validator";
+import Countries from "../data/Countries";
+import PropTypes from "prop-types";
+import { editEmployee } from "../actions";
 import { connect } from "react-redux";
-import { save, addEmployee } from "../actions";
 
-class Form extends Component {
+class UpdateForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,20 +16,24 @@ class Form extends Component {
       passError: "",
       error: "",
       obj: {
-        id: 0,
-        name: "",
-        gender: "",
-        country: "",
-        email: "",
-        phone: "",
-        password: "",
-        description: ""
+        name: this.props.location.state.name,
+        id: this.props.location.state.id,
+        gender: this.props.location.state.gender,
+        country: this.props.location.state.country,
+        email: this.props.location.state.email,
+        phone: this.props.location.state.phone,
+        password: this.props.location.state.password,
+        description: this.props.location.state.description
       }
     };
   }
-  render() {
-    const { save, addEmployee } = this.props;
 
+  static propTypes = {
+    employees: PropTypes.array.isRequired,
+    editEmployee: PropTypes.func.isRequired
+  };
+
+  render() {
     const handleInputChange = (event) => {
       const { name, value } = event.target;
       if (name === "email") {
@@ -63,11 +69,11 @@ class Form extends Component {
       this.setState((prevState) => ({
         obj: {
           ...prevState.obj,
-          id: Math.floor(Math.random() * (999 - 100 + 1) + 100),
           [name]: value
         }
       }));
     };
+
     const mySubmitHandler = (event) => {
       event.preventDefault();
       var temperror = "";
@@ -88,26 +94,28 @@ class Form extends Component {
         return false;
       } else {
         const obj = this.state.obj;
-        console.log(this.state.obj);
-        save(obj);
-        addEmployee(obj);
-        this.props.history.push("/result");
+        console.log(obj);
+        this.props.editEmployee(obj);
+        this.props.history.push("/allusers");
       }
     };
 
     let options = null;
     options = Countries.country.map((e, key) => (
-      <option key={key} value={e.name}>
+      <option
+        key={key}
+        selected={this.state.obj.country === e.name}
+        value={e.name}
+      >
         {e.name}
       </option>
     ));
-
     return (
-      <div className="center">
-        <form onSubmit={mySubmitHandler} className="container">
+      <div onSubmit={mySubmitHandler} className="center">
+        <form className="container">
           <center>
             {" "}
-            <h1>Add User Form</h1>{" "}
+            <h1>Edit User Details Form</h1>{" "}
           </center>
           <div>
             <label> Name: </label>
@@ -115,6 +123,7 @@ class Form extends Component {
               type="text"
               name="name"
               onChange={handleInputChange}
+              value={this.state.obj.name}
               required
             />
           </div>
@@ -126,6 +135,7 @@ class Form extends Component {
               name="gender"
               type="radio"
               value="Male"
+              checked={this.state.obj.gender === "Male"}
               onChange={handleInputChange}
               required
             />
@@ -135,6 +145,7 @@ class Form extends Component {
               name="gender"
               type="radio"
               value="Female"
+              checked={this.state.obj.gender === "Female"}
               onChange={handleInputChange}
             />
             Female
@@ -143,6 +154,7 @@ class Form extends Component {
               name="gender"
               type="radio"
               value="Others"
+              checked={this.state.obj.gender === "Others"}
               onChange={handleInputChange}
             />
             Others
@@ -164,6 +176,7 @@ class Form extends Component {
             <input
               type="text"
               name="email"
+              value={this.state.obj.email}
               onChange={handleInputChange}
               required
             />
@@ -174,6 +187,7 @@ class Form extends Component {
             <input
               type="text"
               name="phone"
+              value={this.state.obj.phone}
               onChange={handleInputChange}
               required
             />
@@ -184,6 +198,7 @@ class Form extends Component {
             <input
               type="password"
               name="password"
+              value={this.state.obj.password}
               onChange={handleInputChange}
               required
             />
@@ -196,6 +211,7 @@ class Form extends Component {
               rows="4"
               cols="50"
               onChange={handleInputChange}
+              value={this.state.obj.description}
               required
             ></textarea>
           </div>
@@ -210,10 +226,9 @@ class Form extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    form: state
-  };
-};
-
-export default connect(mapStateToProps, { save, addEmployee })(Form);
+const mapStateToProps = (state) => ({
+  employees: state.user.employees
+});
+export default withRouter(
+  connect(mapStateToProps, { editEmployee })(UpdateForm)
+);

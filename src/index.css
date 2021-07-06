@@ -49,3 +49,16 @@ div {
   font-weight: bolder;
   color: red;
 }
+
+.center_horizontal {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.table{
+  padding: 10px;
+}
+th, td {
+  padding: 15px;
+}
