@@ -4,7 +4,7 @@ import "../index.css";
 import validator from "validator";
 import Countries from "../data/Countries";
 import PropTypes from "prop-types";
-import { editEmployee } from "../actions";
+import { editUser } from "../actions";
 import { connect } from "react-redux";
 
 class UpdateForm extends Component {
@@ -29,8 +29,7 @@ class UpdateForm extends Component {
   }
 
   static propTypes = {
-    employees: PropTypes.array.isRequired,
-    editEmployee: PropTypes.func.isRequired
+    editUser: PropTypes.func.isRequired
   };
 
   render() {
@@ -95,7 +94,7 @@ class UpdateForm extends Component {
       } else {
         const obj = this.state.obj;
         console.log(obj);
-        this.props.editEmployee(obj);
+        this.props.editUser(obj);
         this.props.history.push("/allusers");
       }
     };
@@ -226,9 +225,4 @@ class UpdateForm extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-  employees: state.user.employees
-});
-export default withRouter(
-  connect(mapStateToProps, { editEmployee })(UpdateForm)
-);
+export default withRouter(connect(null, { editUser })(UpdateForm));

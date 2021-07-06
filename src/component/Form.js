@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Countries from "../data/Countries";
 import validator from "validator";
 import { connect } from "react-redux";
-import { save, addEmployee } from "../actions";
+import { save, addUser } from "../actions";
 
 class Form extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Form extends Component {
     };
   }
   render() {
-    const { save, addEmployee } = this.props;
+    const { save, addUser } = this.props;
 
     const handleInputChange = (event) => {
       const { name, value } = event.target;
@@ -90,7 +90,7 @@ class Form extends Component {
         const obj = this.state.obj;
         console.log(this.state.obj);
         save(obj);
-        addEmployee(obj);
+        addUser(obj);
         this.props.history.push("/result");
       }
     };
@@ -210,10 +210,5 @@ class Form extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    form: state
-  };
-};
 
-export default connect(mapStateToProps, { save, addEmployee })(Form);
+export default connect(null, { save, addUser })(Form);

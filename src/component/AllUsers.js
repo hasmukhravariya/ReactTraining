@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "../index.css";
 import PropTypes from "prop-types";
-import { getEmployee, editEmployee, deleteEmployee } from "../actions";
+import { getUsers, deleteUser } from "../actions";
 import { connect } from "react-redux";
 
 class App extends Component {
@@ -21,14 +21,13 @@ class App extends Component {
   }
 
   static propTypes = {
-    employees: PropTypes.array.isRequired,
-    getEmployee: PropTypes.func.isRequired,
-    editEmployee: PropTypes.func.isRequired,
-    deleteEmployee: PropTypes.func.isRequired
+    users: PropTypes.array.isRequired,
+    getUsers: PropTypes.func.isRequired,
+    deleteUser: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getEmployee();
+    this.props.getUsers();
   }
 
   editDetails = (data) => {
@@ -50,18 +49,18 @@ class App extends Component {
 
   deleteEmployee = (id) => {
     if (window.confirm("Are you sure?")) {
-      this.props.deleteEmployee(id);
+      this.props.deleteUser(id);
     }
   };
 
   render() {
     return (
-      <div className="center_horizontal">
-        <header >
+      <div className="App">
+        <header>
           <h1>Users Detail Table</h1>
         </header>
-        <div>
-          <table border="2" align="center">
+        <div className="center_horizontal">
+          <table align="center" border="2">
             <thead>
               <tr>
                 <th>ID</th>
@@ -75,8 +74,8 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.employees &&
-                this.props.employees.map((data, index) => {
+              {this.props.users &&
+                this.props.users.map((data, index) => {
                   return (
                     <tr key={index + 1}>
                       <td>{index + 1}</td>
@@ -111,13 +110,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  employees: state.user.employees
+  users: state.user.users
 });
 
 export default withRouter(
   connect(mapStateToProps, {
-    getEmployee,
-    editEmployee,
-    deleteEmployee
+    getUsers,
+    deleteUser
   })(App)
 );
