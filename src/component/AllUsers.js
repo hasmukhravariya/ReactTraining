@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { getUsers, deleteUser } from "../actions/UserActions";
 import { connect } from "react-redux";
 
-class App extends Component {
+class AllUsers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -117,5 +117,5 @@ export default withRouter(
   connect(mapStateToProps, {
     getUsers,
     deleteUser
-  })(App)
+  })(AllUsers)
 );

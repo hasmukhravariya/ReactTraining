@@ -107,12 +107,12 @@ class Form extends Component {
       <div className="center">
         <form onSubmit={mySubmitHandler} className="container">
           <center>
-            {" "}
-            <h1>Add User Form</h1>{" "}
+            <h1>Add User Form</h1>
           </center>
           <div>
             <label> Name: </label>
             <input
+              id="name"
               type="text"
               name="name"
               onChange={handleInputChange}
@@ -163,6 +163,7 @@ class Form extends Component {
           <div>
             <label>Enter Email:</label>
             <input
+              id="email"
               type="text"
               name="email"
               onChange={handleInputChange}
@@ -173,6 +174,7 @@ class Form extends Component {
           <div>
             <label>Phone Number:</label>
             <input
+              id="phone"
               type="text"
               name="phone"
               onChange={handleInputChange}
@@ -183,6 +185,7 @@ class Form extends Component {
           <div>
             <label>Password:</label>
             <input
+              id="password"
               type="password"
               name="password"
               onChange={handleInputChange}
@@ -193,6 +196,7 @@ class Form extends Component {
           <div>
             <label>Description:</label>
             <textarea
+              id="description"
               name="description"
               rows="4"
               cols="50"
@@ -202,7 +206,7 @@ class Form extends Component {
           </div>
           <div>
             <input type="submit" className="button" />
-            <Link to={{ pathname: "/" }} className="button">
+            <Link to="/" className="button">
               Back
             </Link>
           </div>
