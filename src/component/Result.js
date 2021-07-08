@@ -36,8 +36,7 @@ class Result extends Component {
       <div className="center">
         <div className="container">
           <center>
-            {" "}
-            <h1> Form Details</h1>{" "}
+            <h1> Form Details</h1>
           </center>
           <div>
             <strong>Name:</strong> {this.state.name}
@@ -60,7 +59,7 @@ class Result extends Component {
           <div>
             <strong>Description:</strong> {this.state.description}
           </div>
-          <Link to={{ pathname: "/" }} className="button">
+          <Link id="back" to={{ pathname: "/" }} className="button">
             Back
           </Link>
         </div>
