@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../index.css";
 import validator from "validator";
 import Countries from "../data/Countries";
@@ -101,17 +101,13 @@ class UpdateForm extends Component {
 
     let options = null;
     options = Countries.country.map((e, key) => (
-      <option
-        key={key}
-        selected={this.state.obj.country === e.name}
-        value={e.name}
-      >
+      <option key={key} value={e.name}>
         {e.name}
       </option>
     ));
     return (
-      <div onSubmit={mySubmitHandler} className="center">
-        <form className="container">
+      <div className="center">
+        <form onSubmit={mySubmitHandler} className="container">
           <center>
             {" "}
             <h1>Edit User Details Form</h1>{" "}
@@ -165,6 +161,7 @@ class UpdateForm extends Component {
               id="country"
               name="country"
               onChange={handleInputChange}
+              defaultValue={this.state.obj.country}
               required
             >
               {options}
@@ -216,7 +213,7 @@ class UpdateForm extends Component {
           </div>
           <div>
             <input type="submit" className="button" />
-            <Link to={{ pathname: "/" }} className="button">
+            <Link to="/" className="button">
               Back
             </Link>
           </div>
@@ -225,4 +222,4 @@ class UpdateForm extends Component {
     );
   }
 }
-export default withRouter(connect(null, { editUser })(UpdateForm));
+export default connect(null, { editUser })(UpdateForm);

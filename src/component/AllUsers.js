@@ -1,23 +1,16 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../index.css";
 import PropTypes from "prop-types";
 import { getUsers, deleteUser } from "../actions/UserActions";
 import { connect } from "react-redux";
+import store from "../Store";
 
-class AllUsers extends Component {
+export class AllUsers extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      id: "",
-      gender: "",
-      country: "",
-      email: "",
-      phone: "",
-      password: "",
-      description: ""
-    };
+    const temp = store.getState().user.users;
+    this.state = { temp };
   }
 
   static propTypes = {
@@ -86,12 +79,18 @@ class AllUsers extends Component {
                       <td>{data.phone}</td>
                       <td>{data.description}</td>
                       <td>
-                        <button onClick={() => this.editDetails(data)}>
+                        <button
+                          id="edit"
+                          onClick={() => this.editDetails(data)}
+                        >
                           EDIT
-                        </button>{" "}
-                        <button onClick={() => this.deleteEmployee(data.id)}>
+                        </button>
+                        <button
+                          id="delete"
+                          onClick={() => this.deleteEmployee(data.id)}
+                        >
                           DELETE
-                        </button>{" "}
+                        </button>
                       </td>
                     </tr>
                   );
@@ -99,7 +98,7 @@ class AllUsers extends Component {
             </tbody>
           </table>
           <div>
-            <Link to={{ pathname: "/" }} className="button">
+            <Link id="back" to="/" className="button">
               Back
             </Link>
           </div>
@@ -113,9 +112,7 @@ const mapStateToProps = (state) => ({
   users: state.user.users
 });
 
-export default withRouter(
-  connect(mapStateToProps, {
-    getUsers,
-    deleteUser
-  })(AllUsers)
-);
+export default connect(mapStateToProps, {
+  getUsers,
+  deleteUser
+})(AllUsers);

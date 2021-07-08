@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Countries from "../data/Countries";
 import validator from "validator";
 import { connect } from "react-redux";
-import {  addUser } from "../actions/UserActions";
+import { addUser } from "../actions/UserActions";
 import { save } from "../actions/SaveActions";
 
 class Form extends Component {
@@ -89,7 +89,7 @@ class Form extends Component {
         return false;
       } else {
         const obj = this.state.obj;
-        console.log(this.state.obj);
+        // console.log(this.state.obj);
         save(obj);
         addUser(obj);
         this.props.history.push("/result");
@@ -115,6 +115,7 @@ class Form extends Component {
               id="name"
               type="text"
               name="name"
+              value={this.state.obj.name}
               onChange={handleInputChange}
               required
             />
@@ -123,7 +124,7 @@ class Form extends Component {
           <div>
             <label> Gender: </label>
             <input
-              id="male"
+              id="gender"
               name="gender"
               type="radio"
               value="Male"
@@ -132,7 +133,7 @@ class Form extends Component {
             />
             Male
             <input
-              id="female"
+              id="gender"
               name="gender"
               type="radio"
               value="Female"
@@ -140,7 +141,7 @@ class Form extends Component {
             />
             Female
             <input
-              id="others"
+              id="gender"
               name="gender"
               type="radio"
               value="Others"
@@ -166,6 +167,7 @@ class Form extends Component {
               id="email"
               type="text"
               name="email"
+              value={this.state.obj.email}
               onChange={handleInputChange}
               required
             />
@@ -177,6 +179,7 @@ class Form extends Component {
               id="phone"
               type="text"
               name="phone"
+              value={this.state.obj.phone}
               onChange={handleInputChange}
               required
             />
@@ -188,6 +191,7 @@ class Form extends Component {
               id="password"
               type="password"
               name="password"
+              value={this.state.obj.password}
               onChange={handleInputChange}
               required
             />
@@ -201,6 +205,7 @@ class Form extends Component {
               rows="4"
               cols="50"
               onChange={handleInputChange}
+              value={this.state.obj.description}
               required
             ></textarea>
           </div>
