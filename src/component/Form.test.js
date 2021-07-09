@@ -3,8 +3,8 @@ import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { Provider } from "react-redux";
 import Form from "./Form";
-// import { addUser } from "../actions/UserActions";
-// import { save } from "../actions/SaveActions";
+import { addUser } from "../actions/UserActions";
+import { save } from "../actions/SaveActions";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
@@ -14,27 +14,39 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("Form component", () => {
   let store;
-  // let component;
   let wrapper;
-  const initialstate = {
-    id: 0,
-    name: "",
-    gender: "",
-    country: "",
-    email: "",
-    phone: "",
-    password: "",
-    description: ""
+  let initialstate = {
+    user: {
+      users: []
+    },
+    save: {
+      name: "",
+      id: "",
+      gender: "",
+      country: "",
+      email: "",
+      phone: "",
+      password: "",
+      description: ""
+    }
   };
 
   beforeEach(() => {
     store = mockStore(initialstate);
 
     store.dispatch = jest.fn();
+    const history = { push: jest.fn() };
+
+    let props = {
+      history: history,
+      addUser: addUser,
+      save: save
+    };
+
     wrapper = mount(
       <Provider store={store}>
         <Router>
-          <Form />
+          <Form {...props} />
         </Router>
       </Provider>
     );
@@ -82,18 +94,8 @@ describe("Form component", () => {
       .find("#gender")
       .at(1)
       .simulate("change", { target: { checked: true } });
-    // console.log(wrapper.find("#description").prop("value"));
-  });
-
-  it("to check submit with zero values", () => {
     wrapper.find("select").simulate("change", 0);
-    // wrapper
-    //   .find("#name")
-    //   .simulate("change", { target: { name: "name", value: "Hasmukh" } });
-    // wrapper.find("form").simulate("submit", { preventDefault: () => {} });
-    // expect(store.dispatch).toHaveBeenCalledTimes(1);
-    // expect(store.dispatch).toHaveBeenCalledWith(
-    //   save({ payload: "some other text" })
-    // );
+    wrapper.find("form").simulate("submit", { preventDefault: () => {} });
+    expect(store.dispatch).toHaveBeenCalledTimes(2);
   });
 });
