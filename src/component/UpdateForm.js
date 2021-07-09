@@ -115,6 +115,7 @@ class UpdateForm extends Component {
           <div>
             <label> Name: </label>
             <input
+              id="name"
               type="text"
               name="name"
               onChange={handleInputChange}

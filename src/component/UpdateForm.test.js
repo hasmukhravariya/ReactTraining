@@ -5,7 +5,7 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-// import { deleteUser } from "../actions/UserActions";
+import { editUser } from "../actions/UserActions";
 
 const mockStore = configureStore([thunk]);
 
@@ -42,8 +42,12 @@ describe("AllUsers component", () => {
 
   beforeEach(() => {
     store = mockStore(InitialState);
+    const history = { push: jest.fn() };
+    // const editUser = editUser;
 
     let props = {
+      history: history,
+      editUser: editUser,
       location: {
         state: {
           name: "Hasmukh",
@@ -74,7 +78,7 @@ describe("AllUsers component", () => {
   });
 
   it("renders Form component without crashing", () => {
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     expect(wrapper.find("h1")).toHaveLength(1);
     expect(wrapper.find("h1").text()).toEqual("Edit User Details Form");
   });
@@ -87,13 +91,11 @@ describe("AllUsers component", () => {
   });
 
   it("passed data present in store state ", () => {
-    // console.log(wrapper.props().prop.location.state.name);
-    // expect(wrapper.props().location.state).toBe(InitialState.user.user);
-  });
-
-  it("calls a thunk-dispatched action", () => {
-    // const id = "1";
-    // console.log(wrapper.find("#delete").text());
-    // expect(store.getActions()).toContainEqual(saveColor({ color }));
+    wrapper.find("#name").simulate("change", {
+      target: { name: "name", value: "Hasmukh Ravariya" }
+    });
+    expect(wrapper.find("#name").prop("value")).toEqual("Hasmukh Ravariya");
+    wrapper.find("form").simulate("submit", { preventDefault: () => {} });
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 });
